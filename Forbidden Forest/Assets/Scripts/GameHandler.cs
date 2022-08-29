@@ -7,7 +7,8 @@ public class GameHandler : MonoBehaviour{
 
     public DungeonGenerator dungeonGenerator {get; private set;}
     [SerializeField] private int seed;
-    
+    [SerializeField] private LayerScriptableObject layer;
+
     private void Awake() {
         if(Instance != null){
             Debug.LogError("The Instance GameHandler already exist! " + gameObject);
@@ -18,7 +19,7 @@ public class GameHandler : MonoBehaviour{
         Instance = this;
 
         // NewSeed();
-        dungeonGenerator = new DungeonGenerator(seed);
+        dungeonGenerator = new DungeonGenerator(seed, layer);
     }
 
     private void NewSeed(){
