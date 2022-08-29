@@ -8,6 +8,6 @@ public class LayerScriptableObject : ScriptableObject {
     public int rowCount;
     public int maxRoom;
     public int minRoom;
-    public float eliteEncounter;
-    public float specialEncounter;
+    public int eliteEncounter;
+    public int specialEncounter;
 }
