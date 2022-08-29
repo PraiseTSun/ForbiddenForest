@@ -22,6 +22,28 @@ public class DungeonGenerator {
         AddRoomsToRows();
         StartingRoom();
         BossRoom();
+        RoomPath();
+    }
+
+    private void RoomPath() {
+        for(int i = 0; i < _rows.Count - 2; i++){
+            Row origin = _rows[i];
+            Row destination = _rows[i + 1];
+
+            foreach(Room room in origin.rooms){
+                Room roomRandom = destination.rooms[_random.Next(0, destination.Lenght)];
+                room.destinations.Add(roomRandom);
+                roomRandom.origins.Add(room);
+            }
+
+            foreach(Room room in destination.rooms){
+                if(room.HasNoOrigins){
+                    Room roomRandom = origin.rooms[_random.Next(0, origin.Lenght)];
+                    room.origins.Add(roomRandom);
+                    roomRandom.destinations.Add(room);
+                }
+            }
+        }
     }
 
     private void BossRoom() {

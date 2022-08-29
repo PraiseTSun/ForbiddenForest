@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   naming: Entrace
   rowCount: 15
+  maxRoom: 4
+  minRoom: 2
+  eliteEncounter: 15
+  specialEncounter: 30
