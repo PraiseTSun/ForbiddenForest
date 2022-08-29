@@ -20,8 +20,15 @@ public class DungeonGenerator {
     private void Generate() {
         CreateRows();
         AddRoomsToRows();
-
         StartingRoom();
+        BossRoom();
+    }
+
+    private void BossRoom() {
+        Row row = new Row();
+        _rows.Add(row);
+
+        row.rooms.Add(new Room());
     }
 
     private void AddRoomsToRows() {
@@ -43,9 +50,9 @@ public class DungeonGenerator {
 
     private void StartingRoom() {
         Row row = new Row();
-        _rows.Add(row);
+        _rows.Insert(0, row);
 
-        row.rooms.Insert(0, new Room());
+        row.rooms.Add(new Room());
     }
 
     public Room FirstRoom => _rows[0].rooms[0];
