@@ -6,4 +6,8 @@ using UnityEngine;
 public class LayerScriptableObject : ScriptableObject {
     public string naming;
     public int rowCount;
+    public int maxRoom;
+    public int minRoom;
+    public float eliteEncounter;
+    public float specialEncounter;
 }
