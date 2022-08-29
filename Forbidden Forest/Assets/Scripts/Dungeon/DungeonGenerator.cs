@@ -18,6 +18,13 @@ public class DungeonGenerator {
 
     private void Generate() {
         StartingRoom();
+        CreateRows();
+    }
+
+    private void CreateRows() {
+        for(int i = 0; i < _layer.rowCount; i++){
+            _rows.Add(new Row());
+        }
     }
 
     private void StartingRoom() {
