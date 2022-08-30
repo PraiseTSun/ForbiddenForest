@@ -22,6 +22,10 @@ public class GameHandler : MonoBehaviour{
         dungeonGenerator = new DungeonGenerator(seed, layer);
     }
 
+    private void Start() {
+        MapHandler.Instance.GenerateMap(dungeonGenerator.ProceduralGeneration);
+    }
+
     private void NewSeed(){
         seed = UnityEngine.Random.Range(0, int.MaxValue);
     }

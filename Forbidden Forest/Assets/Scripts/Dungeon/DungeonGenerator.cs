@@ -98,4 +98,6 @@ public class DungeonGenerator {
     }
 
     public Room FirstRoom => _rows[0].rooms[0];
+    public List<Row> Rows => _rows;
+    public Random ProceduralGeneration => _random;
 }
