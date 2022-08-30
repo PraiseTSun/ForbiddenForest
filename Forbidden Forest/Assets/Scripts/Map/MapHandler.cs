@@ -21,7 +21,9 @@ public class MapHandler : MonoBehaviour {
 
     private Vector3 _mapOffset;
     private Vector3Int _size;
+    private float _roomWidth;
     private Dictionary<Room, Vector2> _roomPosition;
+    private List<Vector3> _roomRowPos;
     private Random _random;
     
     private void Awake() {
@@ -38,11 +40,14 @@ public class MapHandler : MonoBehaviour {
     private void SetUpOffsets(){
         RectTransform size = GetComponent<RectTransform>();
         _mapOffset = transform.position - new Vector3(size.sizeDelta.x / 2, size.sizeDelta.y / 2, 0f);
+        
         _size = new Vector3Int (
             (int) size.sizeDelta.x,
             (int) size.sizeDelta.y,
             0
         );
+
+        _roomWidth = roomPrefab.GetComponent<RectTransform>().sizeDelta.x;
     }
     
 
@@ -72,9 +77,11 @@ public class MapHandler : MonoBehaviour {
 
         for(int i = 1; i < rows.Count - 1; i++){
             float height = i * rowHeight;
-            
+            _roomRowPos = new List<Vector3>();
+
             foreach(Room room in rows[i].rooms){
                 Vector3 position = GetRoomPosition(height);
+                _roomRowPos.Add(position);
                 Instantiate(roomPrefab, position, Quaternion.identity, roomParent);
             }
         }
@@ -85,10 +92,29 @@ public class MapHandler : MonoBehaviour {
     }
 
     private Vector3 GetRoomPosition(float height){
+        int posX = 0;
+        
+        do{
+            posX = _random.Next(borderOffset.x, _size.x - borderOffset.x);
+        } while(RoomOvelap(posX, height));
+
         return _mapOffset + new Vector3(
-            _random.Next(borderOffset.x, _size.x - borderOffset.x),
+            posX,
             height,
             0f
         );
+    }
+
+    private bool RoomOvelap(int posX, float height) {
+        Vector3 target = new Vector3(posX, height, 0);
+
+        foreach(Vector3 pos in _roomRowPos){
+            if((pos - target).magnitude <= _roomWidth * 2){
+                Debug.Log((pos - target).magnitude);
+                return true;
+            }
+        }
+
+        return false; 
     }
 }
