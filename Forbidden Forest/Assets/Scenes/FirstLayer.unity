@@ -266,10 +266,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd98e34eb67e47429ccd104b0e05824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  borderOffset: {x: 0, y: 0}
+  rowHeight: 500
   roomPrefab: {fileID: -5887624671515965842, guid: e4d9c1385f3459e4d8e38d153360cb7d, type: 3}
   pathPrefab: {fileID: 0}
   roomParent: {fileID: 2092992673}
   pathParent: {fileID: 1650535176}
+  scrollObject: {fileID: 1422176284}
 --- !u!114 &139358443
 MonoBehaviour:
   m_ObjectHideFlags: 0
