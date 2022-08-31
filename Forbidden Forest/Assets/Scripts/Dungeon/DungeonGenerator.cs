@@ -45,7 +45,7 @@ public class DungeonGenerator {
     }
 
     private void RoomPath() {
-        for(int i = 0; i < _rows.Count - 2; i++){
+        for(int i = 0; i < _rows.Count - 1; i++){
             Row origin = _rows[i];
             Row destination = _rows[i + 1];
 

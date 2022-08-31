@@ -266,10 +266,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd98e34eb67e47429ccd104b0e05824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  borderOffset: {x: 0, y: 0}
+  borderOffset: {x: 50, y: 100}
   rowHeight: 500
+  roomRadius: 250
   roomPrefab: {fileID: -5887624671515965842, guid: e4d9c1385f3459e4d8e38d153360cb7d, type: 3}
-  pathPrefab: {fileID: 0}
+  pathPrefab: {fileID: 7780673316587587359, guid: d9728e1085711d746bcf867e73cd64c4, type: 3}
   roomParent: {fileID: 2092992673}
   pathParent: {fileID: 1650535176}
   scrollObject: {fileID: 1422176284}
@@ -525,8 +526,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2092992673}
   - {fileID: 1650535176}
+  - {fileID: 2092992673}
   m_Father: {fileID: 139358439}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -564,7 +565,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1422176284}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -676,7 +677,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1422176284}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
