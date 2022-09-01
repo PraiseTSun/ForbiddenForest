@@ -37,6 +37,11 @@ public class MapHandler : MonoBehaviour {
         SetUpOffsets();
     }
 
+    private void Start() {
+        GenerateMap();
+        gameObject.SetActive(false);
+    }
+
     private void SetUpOffsets(){
         RectTransform size = GetComponent<RectTransform>();
         _mapOffset = transform.position - new Vector3(size.sizeDelta.x / 2, size.sizeDelta.y / 2, 0f);
@@ -49,8 +54,8 @@ public class MapHandler : MonoBehaviour {
     }
     
 
-    public void GenerateMap(Random random){
-        _random = random;
+    public void GenerateMap(){
+        _random = GameHandler.Instance.dungeonGenerator.random;
         _roomPosition = new Dictionary<Room, Vector2>();
         AdjustScrollHeight();
         GenerateRooms();

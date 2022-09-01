@@ -4,13 +4,13 @@ using UnityEngine;
 using Random = System.Random;
 
 public class DungeonGenerator {
-    private Random _random;
+    public Random random {get; private set;}
     private LayerScriptableObject _layer;
     private List<Row> _rows;
     private List<Room> _roomsWithoutType;
 
     public DungeonGenerator(int seed, LayerScriptableObject layer) {
-        _random = new Random(seed);
+        random = new Random(seed);
         _layer = layer;
         _rows = new List<Row>();
         _roomsWithoutType = new List<Room>();
@@ -38,7 +38,7 @@ public class DungeonGenerator {
 
     private void AssignRoomsType(int count, Room.Type type) {
         for(int i = 0; i < count; i++){
-            Room room = _roomsWithoutType[_random.Next(0, _roomsWithoutType.Count)];
+            Room room = _roomsWithoutType[random.Next(0, _roomsWithoutType.Count)];
             _roomsWithoutType.Remove(room);
             room.type = type;
         }
@@ -50,14 +50,14 @@ public class DungeonGenerator {
             Row destination = _rows[i + 1];
 
             foreach(Room room in origin.rooms){
-                Room roomRandom = destination.rooms[_random.Next(0, destination.Lenght)];
+                Room roomRandom = destination.rooms[random.Next(0, destination.Lenght)];
                 room.destinations.Add(roomRandom);
                 roomRandom.origins.Add(room);
             }
 
             foreach(Room room in destination.rooms){
                 if(room.HasNoOrigins){
-                    Room roomRandom = origin.rooms[_random.Next(0, origin.Lenght)];
+                    Room roomRandom = origin.rooms[random.Next(0, origin.Lenght)];
                     room.origins.Add(roomRandom);
                     roomRandom.destinations.Add(room);
                 }
@@ -74,7 +74,7 @@ public class DungeonGenerator {
 
     private void AddRoomsToRows() {
         foreach(Row row in _rows){
-            int roomCount = _random.Next(_layer.minRoom, _layer.maxRoom);
+            int roomCount = random.Next(_layer.minRoom, _layer.maxRoom);
 
             for(int i = 0; i < roomCount; i++){
                 Room room = new Room();
@@ -100,5 +100,4 @@ public class DungeonGenerator {
     public Room FirstRoom => _rows[0].rooms[0];
     public List<Row> Rows => _rows;
     public int Lenght => _rows.Count;
-    public Random ProceduralGeneration => _random;
 }
