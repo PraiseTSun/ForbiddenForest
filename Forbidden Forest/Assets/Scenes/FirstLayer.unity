@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5316e7a1f407dd2418bf97851c077c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seed: 0
+  seed: 265
   layer: {fileID: 11400000, guid: 9c45bf2e8fb169d499e0e600506fc446, type: 2}
 --- !u!4 &52566010
 Transform:
