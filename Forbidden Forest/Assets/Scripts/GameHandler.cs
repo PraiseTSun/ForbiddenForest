@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameHandler : MonoBehaviour{
-    public static GameHandler Instance {get; private set;}
+public class GameHandler : MonoBehaviour
+{
+    public static GameHandler Instance { get; private set; }
 
-    public DungeonGenerator dungeonGenerator {get; private set;}
+    public DungeonGenerator dungeonGenerator { get; private set; }
     [SerializeField] private int seed;
     [SerializeField] private LayerScriptableObject layer;
 
-    private void Awake() {
-        if(Instance != null){
+    private void Awake()
+    {
+        if (Instance != null)
+        {
             Debug.LogError("The Instance GameHandler already exist! " + gameObject);
             Destroy(gameObject);
             return;
@@ -22,7 +25,8 @@ public class GameHandler : MonoBehaviour{
         dungeonGenerator = new DungeonGenerator(seed, layer);
     }
 
-    private void NewSeed(){
+    private void NewSeed()
+    {
         seed = UnityEngine.Random.Range(0, int.MaxValue);
     }
 }

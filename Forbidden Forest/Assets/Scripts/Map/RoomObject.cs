@@ -3,27 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomObject : MonoBehaviour {
+public class RoomObject : MonoBehaviour
+{
     [SerializeField] private Button button;
     [SerializeField] private Image sprite;
     private Room _room;
 
-    private void OnEnable() {
-        if(DungeonProgression.Instance.IsDetinationRoom(_room)) {
+    private void OnEnable()
+    {
+        if (DungeonProgression.Instance.IsDetinationRoom(_room))
+        {
             button.enabled = true;
             sprite.color = Color.green;
         }
-        else {
+        else
+        {
             button.enabled = false;
             sprite.color = Color.white;
         }
     }
 
-    public void SetRoom (Room room){
+    public void SetRoom(Room room)
+    {
         _room = room;
     }
 
-    public void SelectRoom(){
+    public void SelectRoom()
+    {
         DungeonProgression.Instance.SelectDestinationRoom(_room);
     }
 }

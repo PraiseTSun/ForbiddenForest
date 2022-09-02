@@ -2,10 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Row {
-    public List<Room> rooms {get; private set;}
+public class Row
+{
+    public List<Room> rooms { get; private set; }
 
-    public Row(){
+    public Row()
+    {
         rooms = new List<Room>();
     }
 

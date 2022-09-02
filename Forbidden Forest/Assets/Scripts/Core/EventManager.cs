@@ -3,8 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour {
-    public static EventManager Instance {get; private set;}
+public class EventManager : MonoBehaviour
+{
+    public static EventManager Instance { get; private set; }
 
     public event EventHandler OnWin;
     public event EventHandler OnLose;
@@ -12,8 +13,10 @@ public class EventManager : MonoBehaviour {
 
     public event EventHandler OnNextRoom;
 
-    private void Awake() {
-        if (Instance != null){
+    private void Awake()
+    {
+        if (Instance != null)
+        {
             Debug.LogError("The Instance EventHandler already exist → " + gameObject);
             Destroy(gameObject);
             return;
@@ -22,19 +25,23 @@ public class EventManager : MonoBehaviour {
         Instance = this;
     }
 
-    public void OnWinTrigger (){
+    public void OnWinTrigger()
+    {
         OnWin?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnLoseTrigger (){
+    public void OnLoseTrigger()
+    {
         OnLose?.Invoke(this, EventArgs.Empty);
     }
-    
-    public void OnEncounterEndTrigger (){
+
+    public void OnEncounterEndTrigger()
+    {
         OnEncouterDone?.Invoke(this, EventArgs.Empty);
     }
 
-    public void OnNextRoomTrigger(){
+    public void OnNextRoomTrigger()
+    {
         OnNextRoom?.Invoke(this, EventArgs.Empty);
     }
 }

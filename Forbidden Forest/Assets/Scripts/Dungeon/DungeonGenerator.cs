@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = System.Random;
 
-public class DungeonGenerator {
-    public Random random {get; private set;}
+public class DungeonGenerator
+{
+    public Random random { get; private set; }
     private LayerScriptableObject _layer;
     private List<Row> _rows;
     private List<Room> _roomsWithoutType;
 
-    public DungeonGenerator(int seed, LayerScriptableObject layer) {
+    public DungeonGenerator(int seed, LayerScriptableObject layer)
+    {
         random = new Random(seed);
         _layer = layer;
         _rows = new List<Row>();
@@ -18,7 +20,8 @@ public class DungeonGenerator {
         Generate();
     }
 
-    private void Generate() {
+    private void Generate()
+    {
         CreateRows();
         AddRoomsToRows();
         StartingRoom();
@@ -27,7 +30,8 @@ public class DungeonGenerator {
         AssignRoomsTypes();
     }
 
-    private void AssignRoomsTypes() {
+    private void AssignRoomsTypes()
+    {
         int eliteCount = _roomsWithoutType.Count * _layer.eliteEncounter / 100;
         int specialCount = _roomsWithoutType.Count * _layer.specialEncounter / 100;
 
@@ -36,27 +40,34 @@ public class DungeonGenerator {
         AssignRoomsType(_roomsWithoutType.Count, Room.Type.Combat);
     }
 
-    private void AssignRoomsType(int count, Room.Type type) {
-        for(int i = 0; i < count; i++){
+    private void AssignRoomsType(int count, Room.Type type)
+    {
+        for (int i = 0; i < count; i++)
+        {
             Room room = _roomsWithoutType[random.Next(0, _roomsWithoutType.Count)];
             _roomsWithoutType.Remove(room);
             room.type = type;
         }
     }
 
-    private void RoomPath() {
-        for(int i = 0; i < _rows.Count - 1; i++){
+    private void RoomPath()
+    {
+        for (int i = 0; i < _rows.Count - 1; i++)
+        {
             Row origin = _rows[i];
             Row destination = _rows[i + 1];
 
-            foreach(Room room in origin.rooms){
+            foreach (Room room in origin.rooms)
+            {
                 Room roomRandom = destination.rooms[random.Next(0, destination.Lenght)];
                 room.destinations.Add(roomRandom);
                 roomRandom.origins.Add(room);
             }
 
-            foreach(Room room in destination.rooms){
-                if(room.HasNoOrigins){
+            foreach (Room room in destination.rooms)
+            {
+                if (room.HasNoOrigins)
+                {
                     Room roomRandom = origin.rooms[random.Next(0, origin.Lenght)];
                     room.origins.Add(roomRandom);
                     roomRandom.destinations.Add(room);
@@ -65,18 +76,22 @@ public class DungeonGenerator {
         }
     }
 
-    private void BossRoom() {
+    private void BossRoom()
+    {
         Row row = new Row();
         _rows.Add(row);
 
         row.rooms.Add(new Room());
     }
 
-    private void AddRoomsToRows() {
-        foreach(Row row in _rows){
+    private void AddRoomsToRows()
+    {
+        foreach (Row row in _rows)
+        {
             int roomCount = random.Next(_layer.minRoom, _layer.maxRoom);
 
-            for(int i = 0; i < roomCount; i++){
+            for (int i = 0; i < roomCount; i++)
+            {
                 Room room = new Room();
                 row.rooms.Add(room);
                 _roomsWithoutType.Add(room);
@@ -84,13 +99,16 @@ public class DungeonGenerator {
         }
     }
 
-    private void CreateRows() {
-        for(int i = 0; i < _layer.rowCount; i++){
+    private void CreateRows()
+    {
+        for (int i = 0; i < _layer.rowCount; i++)
+        {
             _rows.Add(new Row());
         }
     }
 
-    private void StartingRoom() {
+    private void StartingRoom()
+    {
         Row row = new Row();
         _rows.Insert(0, row);
 
