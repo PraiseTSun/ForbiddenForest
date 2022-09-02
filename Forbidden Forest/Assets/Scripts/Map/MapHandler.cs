@@ -5,8 +5,6 @@ using UnityEngine;
 using Random = System.Random;
 
 public class MapHandler : MonoBehaviour {
-    public static MapHandler Instance {get; private set;}
-
     [SerializeField] private Vector2Int borderOffset;
     [SerializeField] private float rowHeight = 100f;
     [SerializeField] private float roomRadius = 250f;
@@ -27,13 +25,6 @@ public class MapHandler : MonoBehaviour {
     private Random _random;
     
     private void Awake() {
-        if(Instance != null){
-            Debug.LogError("The Instance MapHandler already exist! " + gameObject);
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
         SetUpOffsets();
     }
 
@@ -99,9 +90,11 @@ public class MapHandler : MonoBehaviour {
     private void GenerateRooms() {
         List<Row> rows = GameHandler.Instance.dungeonGenerator.Rows;
         
+        Room tmp = rows[0].rooms[0];
         Vector3 center = _mapOffset + new Vector3(0.5f * _size.x, borderOffset.y, 0f);
         RoomObject roomObj = Instantiate(roomPrefab, center, Quaternion.identity, roomParent);
-        _roomPosition.Add(rows[0].rooms[0], center);
+        roomObj.SetRoom(tmp);
+        _roomPosition.Add(tmp, center);
         roomObj.gameObject.name = "Start";
 
         for(int i = 1; i < rows.Count - 1; i++){
@@ -112,13 +105,16 @@ public class MapHandler : MonoBehaviour {
                 Vector3 position = GetRoomPosition(height);
                 _roomPosition.Add(room, position);
                 _roomRowPos.Add(position);
-                Instantiate(roomPrefab, position, Quaternion.identity, roomParent);
+                roomObj = Instantiate(roomPrefab, position, Quaternion.identity, roomParent);
+                roomObj.SetRoom(room);
             }
         }
 
         center += Vector3.up * (rows.Count - 1 ) * rowHeight;
+        tmp = rows[rows.Count - 1].rooms[0];
         roomObj = Instantiate(roomPrefab, center, Quaternion.identity, roomParent);
-        _roomPosition.Add(rows[rows.Count - 1].rooms[0], center);
+        roomObj.SetRoom(tmp);
+        _roomPosition.Add(tmp, center);
         roomObj.gameObject.name = "Boss";
     }
 

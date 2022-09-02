@@ -23,5 +23,10 @@ public class DungeonProgression : MonoBehaviour {
 
     public void SelectDestinationRoom (Room room){
         currentRoom = room;
+        EventManager.Instance.OnNextRoomTrigger();
+    }
+
+    public bool IsDetinationRoom(Room room){
+        return currentRoom == null ? false : currentRoom.destinations.Contains(room);
     }
 }
