@@ -11,7 +11,6 @@ public class EventManager : MonoBehaviour
     public event EventHandler OnLose;
     public event EventHandler OnEncouterDone;
     public event EventHandler OnNextRoom;
-    public event EventHandler OnDrawCard;
 
 
     private void Awake()
@@ -44,10 +43,5 @@ public class EventManager : MonoBehaviour
     public void OnNextRoomTrigger()
     {
         OnNextRoom?.Invoke(this, EventArgs.Empty);
-    }
-
-    public void OnDrawCardTrigger(CardScriptableObject card)
-    {
-        OnDrawCard?.Invoke(this, EventArgs.Empty);
     }
 }

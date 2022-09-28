@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(20)]
 public class CombatSystem : MonoBehaviour
 {
     public static CombatSystem Instance { get; private set; }
     public event EventHandler OnPlayerTurn;
     public event EventHandler OnEnemyTurn;
+    public event EventHandler OnDrawCard;
 
     private enum Phase
     {
@@ -73,5 +75,10 @@ public class CombatSystem : MonoBehaviour
                 StartPhase(Phase.Player);
                 break;
         }
+    }
+
+    public void OnDrawCardTrigger(CardScriptableObject card)
+    {
+        OnDrawCard?.Invoke(this, EventArgs.Empty);
     }
 }

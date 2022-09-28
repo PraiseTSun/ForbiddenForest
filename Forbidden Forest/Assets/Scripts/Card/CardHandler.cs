@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-20)]
 public class CardHandler : MonoBehaviour
 {
     [Header("Transform")]
@@ -11,13 +12,27 @@ public class CardHandler : MonoBehaviour
     [Header("Prefabs")]
     [SerializeField] private CardObject cardPrefabs;
 
+    private List<CardObject> cardsObj;
+
     void Start()
     {
-        EventManager.Instance.OnDrawCard += OnDrawCard;        
+        cardsObj = new List<CardObject>();
+        CombatSystem.Instance.OnDrawCard += OnDrawCard;        
+        CombatSystem.Instance.OnEnemyTurn += OnEnemyTurn;
+    }
+
+    private void OnEnemyTurn(object sender, EventArgs e)
+    {
+        while(cardsObj.Count > 0){
+            CardObject card = cardsObj[0];
+            cardsObj.RemoveAt(0);
+            Destroy(card.gameObject);
+        }
     }
 
     private void OnDrawCard(object sender, EventArgs e)
     {
-        Instantiate(cardPrefabs, deckPosition.position, Quaternion.identity);
+        CardObject card = Instantiate(cardPrefabs, deckPosition.position, Quaternion.identity);
+        cardsObj.Add(card);
     }
 }
