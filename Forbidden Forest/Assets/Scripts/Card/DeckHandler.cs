@@ -22,6 +22,8 @@ public class DeckHandler : MonoBehaviour
         hand = new List<CardScriptableObject>();
         CombatSystem.Instance.OnPlayerTurn += OnPlayerTurn;
         CombatSystem.Instance.OnEnemyTurn += OnEnemyTurn;
+
+        DrawHand();
     }
 
     private void OnPlayerTurn(object sender, EventArgs empty)
@@ -60,7 +62,9 @@ public class DeckHandler : MonoBehaviour
         }
 
         int pos = random.Next(0, drawPile.Count);
-        hand.Add(drawPile[pos]);
+        CardScriptableObject card = drawPile[pos]; 
+        hand.Add(card);
+        EventManager.Instance.OnDrawCardTrigger(card);
         drawPile.RemoveAt(pos);
     }
 }
