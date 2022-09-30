@@ -1765,7 +1765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardSpeed: 35
-  handWidth: 12
+  distanceBetweenCard: 1.25
   deckPosition: {fileID: 900545978}
   handParent: {fileID: 1960488248}
   transitionParent: {fileID: 1773828885}
