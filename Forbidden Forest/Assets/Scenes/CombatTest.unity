@@ -1687,6 +1687,7 @@ GameObject:
   - component: {fileID: 1704721619}
   - component: {fileID: 1704721618}
   - component: {fileID: 1704721620}
+  - component: {fileID: 1704721622}
   - component: {fileID: 1704721621}
   m_Layer: 0
   m_Name: Cards
@@ -1764,13 +1765,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 931986a8b0879b14db7c738426c88e2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardLayer:
+    serializedVersion: 2
+    m_Bits: 64
   cardSpeed: 35
-  distanceBetweenCard: 1.25
   deckPosition: {fileID: 900545978}
   handParent: {fileID: 1960488248}
   transitionParent: {fileID: 1773828885}
   graveyardParent: {fileID: 1319034807}
+  distanceBetweenCard: 1.25
   cardPrefabs: {fileID: -6102140175194580595, guid: 85afcd697477d594382dd2174c1680bf, type: 3}
+  selectedCard: {fileID: 0}
+--- !u!114 &1704721622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1704721617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fe4971d399a724f87a8b159bfa97ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1773828884
 GameObject:
   m_ObjectHideFlags: 0
