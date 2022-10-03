@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74eaeaeb7cb6d334dbe5c06f35c20c26, type: 3}
   m_Name: Shield+
   m_EditorClassIdentifier: 
+  energy: 1
   type: 1
   effect: 1
-  value: 5
-  icon: {fileID: 0}
+  value: 8
+  icon: {fileID: 980857819, guid: 891ccb33c55ff154a922bebfae3f692b, type: 3}
   upgrate: {fileID: 0}

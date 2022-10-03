@@ -31,6 +31,7 @@ public class CardHandler : MonoBehaviour
     private List<CardObject> movingToGraveyard;
     private List<CardObject> cardInHand;
     private List<CardObject> cardToMoveInHand;
+    private DeckHandler deck;
 
     void Start()
     {
@@ -42,6 +43,7 @@ public class CardHandler : MonoBehaviour
 
         input = CardInput.Instance;
         mainCam = Camera.main;
+        deck = GetComponent<DeckHandler>();
 
         CombatSystem.Instance.OnDrawCard += OnDrawCard;
         CombatSystem.Instance.OnEnemyTurn += OnEnemyTurn;
@@ -138,6 +140,7 @@ public class CardHandler : MonoBehaviour
     private void OnDrawCard(object sender, EventArgs e)
     {
         CardObject card = Instantiate(cardPrefabs, deckPosition.position, Quaternion.identity, transitionParent);
+        card.SetUpCard(deck.CardDataAtIndex(cardsObj.Count));
         movingToHand.Add(card);
         cardsObj.Add(card);
     }

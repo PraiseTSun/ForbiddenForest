@@ -65,4 +65,8 @@ public class DeckHandler : MonoBehaviour
         CombatSystem.Instance.OnDrawCardTrigger(card);
         drawPile.RemoveAt(pos);
     }
+
+    public CardScriptableObject CardDataAtIndex(int index){
+        return hand[index];
+    }
 }

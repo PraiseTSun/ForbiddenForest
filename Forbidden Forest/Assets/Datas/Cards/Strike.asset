@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74eaeaeb7cb6d334dbe5c06f35c20c26, type: 3}
   m_Name: Strike
   m_EditorClassIdentifier: 
+  energy: 1
   type: 0
-  effect: 0
-  value: 6
-  icon: {fileID: 0}
+  effect: 4
+  value: 5
+  icon: {fileID: 1069470317, guid: 891ccb33c55ff154a922bebfae3f692b, type: 3}
   upgrate: {fileID: 11400000, guid: 78d5cdf6751f7614e88a7b68d50381b3, type: 2}
