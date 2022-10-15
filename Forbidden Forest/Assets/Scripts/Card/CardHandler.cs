@@ -9,6 +9,7 @@ public class CardHandler : MonoBehaviour
     [Header("Card")]
     [SerializeField] private LayerMask cardLayer;
     [SerializeField] private float cardSpeed = 35f;
+    [SerializeField] private LayerMask dropZoneLayer;
 
     [Header("Transform")]
     [SerializeField] private Transform deckPosition;
@@ -85,8 +86,18 @@ public class CardHandler : MonoBehaviour
     {
         if (selectedCard == null)
             return;
+        
+        RaycastHit2D hit = Physics2D.Raycast(MouseInWorld, -Vector2.up, 1f, dropZoneLayer);
+        if (hit.collider != null)
+        {   
+            movingToGraveyard.Add(selectedCard);
+        }
 
-        cardToMoveInHand.Add(selectedCard);
+        else
+        {
+            cardToMoveInHand.Add(selectedCard);
+        }
+
         selectedCard = null;
     }
 
