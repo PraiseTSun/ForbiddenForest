@@ -26,6 +26,7 @@ public class CardHandler : MonoBehaviour
     private CardInput input;
     [SerializeField] private CardObject selectedCard;
     private Camera mainCam;
+    private EnergyBall energyBall;
 
     private List<CardObject> cardsObj;
     private List<CardObject> movingToHand;
@@ -45,6 +46,7 @@ public class CardHandler : MonoBehaviour
         input = CardInput.Instance;
         mainCam = Camera.main;
         deck = GetComponent<DeckHandler>();
+        energyBall = EnergyBall.Instance;
 
         CombatSystem.Instance.OnDrawCard += OnDrawCard;
         CombatSystem.Instance.OnEnemyTurn += OnEnemyTurn;
@@ -88,8 +90,11 @@ public class CardHandler : MonoBehaviour
             return;
         
         RaycastHit2D hit = Physics2D.Raycast(MouseInWorld, -Vector2.up, 1f, dropZoneLayer);
-        if (hit.collider != null)
+        if (hit.collider != null && energyBall.tryToPlay(selectedCard.getEnergy))
         {   
+            cardInHand.Remove(selectedCard);
+            foreach (CardObject card in cardInHand)
+                cardToMoveInHand.Add(card);
             movingToGraveyard.Add(selectedCard);
         }
 
@@ -179,6 +184,7 @@ public class CardHandler : MonoBehaviour
             if (MoveCardToTarget(card, graveyardParent.transform.position))
             {
                 movingToGraveyard.RemoveAt(i);
+                cardsObj.Remove(card);
                 Destroy(card.gameObject);
                 i--;
             }

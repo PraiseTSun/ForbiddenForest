@@ -18,4 +18,6 @@ public class CardObject : MonoBehaviour
         title.text = data.name;
         energy.text = data.energy.ToString();
     }
+
+    public int getEnergy => data.energy;
 }
